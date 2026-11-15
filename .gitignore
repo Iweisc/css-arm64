@@ -1,0 +1,4 @@
+.venv/
+tools/node_modules/
+freertos/build/
+__pycache__/

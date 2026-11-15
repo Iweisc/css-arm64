@@ -1,0 +1,8 @@
+{
+  "name": "css-arm64-tools",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "playwright": "^1.65.0"
+  }
+}

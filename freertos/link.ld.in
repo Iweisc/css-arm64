@@ -1,0 +1,13 @@
+MEMORY {
+    ROM (rx) : ORIGIN = ROM_BASE, LENGTH = ROM_SIZE
+    RAM (rw) : ORIGIN = RAM_BASE, LENGTH = RAM_SIZE
+}
+SECTIONS {
+    /* Read-only data fills the gap between the reset code and the 2 KB-aligned vector table. */
+    .text : { KEEP(*(.reset)) *(.rodata*) . = ALIGN(0x800); KEEP(*(.vectors)) *(.text*) } > ROM
+    /* .data is not copied at boot: the CSS machine starts with it already in RAM. */
+    .data : { *(.data*) } > RAM
+    .bss (NOLOAD) : { *(.bss*) *(COMMON) } > RAM
+    __stack_top = ORIGIN(RAM) + LENGTH(RAM);
+    /DISCARD/ : { *(.comment) *(.note*) *(.eh_frame*) }
+}
